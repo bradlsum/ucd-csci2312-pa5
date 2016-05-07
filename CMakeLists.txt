@@ -1,14 +1,15 @@
-cmake_minimum_required(VERSION 3.5)
-project(ucd_csci2312_pa5)
+cmake_minimum_required(VERSION 3.3)
+project(ucd_csci2312_pa5_master)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES
+    custom_iterator.h
     ErrorContext.cpp
     ErrorContext.h
-    TemplateTests.cpp
-    TemplateTests.h
+    less_functor.h
     main.cpp
-    less_functor.h custom_iterator.h)
+    TemplateTests.cpp
+    TemplateTests.h)
 
-add_executable(ucd_csci2312_pa5 ${SOURCE_FILES})
+add_executable(ucd_csci2312_pa5_master ${SOURCE_FILES})
