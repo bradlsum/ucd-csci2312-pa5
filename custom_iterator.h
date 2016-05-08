@@ -36,12 +36,12 @@ namespace CS2312 {
             typedef size_type difference_type;
 
             iterator(pointer ptr) { __ptr = ptr; };
-            self_type operator++() { ++__ptr;return *this; } ;
-            self_type operator++(int junk) { self_type __return = *this; ++__ptr; return (__return); };
-            reference operator*() { return *(__ptr); };
+            self_type operator++() { __ptr++; return *this; } ;
+            self_type operator++(int junk) { self_type __return = *this; __ptr++; return __return; };
+            reference operator*() { return *__ptr; };
             pointer operator->() { return __ptr; };
-            bool operator==(const self_type& rhs) const { return ( __ptr == rhs.__ptr ); };
-            bool operator!=(const self_type& rhs) const { return (rhs.__ptr != __ptr); };
+            bool operator==(const self_type& rhs) const { return __ptr == rhs.__ptr; };
+            bool operator!=(const self_type& rhs) const { return rhs.__ptr != __ptr; };
 
         private:
 
@@ -61,12 +61,12 @@ namespace CS2312 {
             typedef size_type difference_type;
 
             const_iterator(pointer ptr) { __ptr = ptr; };
-            self_type operator++() { __ptr = ++__ptr; return *this; };
-            self_type operator++(int junk) { self_type __return = *this; ++__ptr; return (__return); };
-            const value_type& operator*() const { return *( __ptr ); };
+            self_type operator++() { __ptr = __ptr++; return *this; };
+            self_type operator++(int junk) { self_type __return = *this; __ptr++; return __return; };
+            const value_type& operator*() const { return *__ptr; };
             const value_type* operator->() const { return __ptr; };
-            bool operator==(const self_type& rhs) const { return (__ptr == rhs.__ptr); };
-            bool operator!=(const self_type& rhs) const { return !( *this == rhs ); };
+            bool operator==(const self_type& rhs) const { return __ptr == rhs.__ptr; };
+            bool operator!=(const self_type& rhs) const { return *this == rhs; };
 
         private:
 
@@ -75,17 +75,17 @@ namespace CS2312 {
         };
 
 
-        fixed_array(size_type size) { __size = size; int cast = size; __data = new T[cast];};
+        fixed_array(size_type size) { __size = size; int i = size; __data = new T[i];};
 
         fixed_array(std::initializer_list<T> list){
             __size = list.size();
-            int j = list.size();
+            int ls = list.size();
 
-            __data = new T[j];
-            for(int i = 0; i < list.size(); i++){ __data[i] = *(list.begin()+i); }
+            __data = new T[ls];
+            for(int i = 0; i < list.size(); ++i){ __data[i] = *list.begin() + i; }
         }
 
-        ~fixed_array() { delete __data; };
+        ~fixed_array() {};
 
         size_type size() const { return __size; };
 
@@ -93,13 +93,13 @@ namespace CS2312 {
 
         const T& operator[](size_type index) const { return __data[index]; };
 
-        iterator begin() { iterator *temp = new iterator(__data); return *temp; };
+        iterator begin() { return iterator(__data); };
 
-        iterator end() { iterator *temp = new iterator(__data+(size())); return *temp; };
+        iterator end() { return iterator(__data + size()); };
 
-        const_iterator begin() const { const_iterator *temp = new const_iterator(__data); return *temp; };
+        const_iterator begin() const { return const_iterator(__data); };
 
-        const_iterator end() const { const_iterator *temp = new const_iterator(__data+(size())); return *temp; };
+        const_iterator end() const { return const_iterator(__data + size()); };
 
     private:
 

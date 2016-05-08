@@ -5,10 +5,6 @@
 #ifndef UCD_CSCI2312_PA5_MASTER_LESS_FUNCTOR_H
 #define UCD_CSCI2312_PA5_MASTER_LESS_FUNCTOR_H
 
-#include <string>
-
-using std::string;
-
 namespace CS2312 {
 
     template<typename T>
